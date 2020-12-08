@@ -1,16 +1,20 @@
 <template>
-  <div>
-    我是一个12vue {{ number }}
+  <div class="common-btn">
+    {{ number }}
   </div>
 </template>
 <script>
+import "./common.less";
 import{ cloneDeep } from 'lodash'
  export default {
-   name: 'Button',
+   name: 'button-demo',
    data() {
      return {
-          number: cloneDeep(1)
+          number: cloneDeep('button')
      }
    }
  }
 </script>
+<style lang="less">
+@import "./common.less";
+</style>

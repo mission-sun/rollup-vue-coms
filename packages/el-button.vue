@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  name: 'Button2'
+   name: 'button-el',
 }
 </script>
 <style>

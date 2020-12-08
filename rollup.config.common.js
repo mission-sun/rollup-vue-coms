@@ -13,12 +13,24 @@ import alias from 'rollup-plugin-alias'
 import postcss from 'rollup-plugin-postcss'
 import path from 'path'
 
+
 console.log('process--------------', process.env.NODE_ENV);
+// import missionUI from './main-common.js'
+// console.log('components', missionUI);
+
+// let configList = [
+//   {
+//     'Button': './packages/button.vue',
+//   },
+//   {
+//     'Button2': './packages/el-button.vue'
+//   }
+// ]
 
 const createBaseConfig = () => {
   return {
     // 核心选项
-   input: './main.js',
+   input: './main-common.js',
   //  input: './packages/el-button.vue',
    external: ['lodash'],
    // 插件
@@ -36,13 +48,15 @@ const createBaseConfig = () => {
      json(),
      vuePlugin(
      ),
-     postcss({
-       extract: path.resolve(`filename.css`)
-     })
+     postcss(),
+    //  postcss({
+    //   extract: true,
+    //   minimize: true
+    // })
    ],
    output: {
      name: 'vuecoms',
-     file: './dist/bundle.umd.js',
+     file: './dist/common.umd.js',
      sourcemap: true,
      format: 'umd',
      globals: {
@@ -52,9 +66,10 @@ const createBaseConfig = () => {
    }
   }
 }
-// let config = '';
+let config = createBaseConfig();
+
 // if (Array.isArray(missionUI)) {
-//   let config = configList.map(item => {
+//   config = configList.map(item => {
 //     let newItem = createBaseConfig();
 //     for (const [key, value] of Object.entries(item)) {
 //       console.log(`${key}: ${value}`);
@@ -64,9 +79,8 @@ const createBaseConfig = () => {
 //     return newItem;
 //   })
 // } else {
-//   let newItem = createBaseConfig();
+//   config = createBaseConfig();
 // }
-let config = createBaseConfig();
 
 export default config
 

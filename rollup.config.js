@@ -26,7 +26,7 @@ const createBaseConfig = () => {
      peerDepsExternal(),
      babel({
        runtimeHelpers: true,  // 是否开启去掉重复代码
-       // exclude: 'node_modules/**'
+       exclude: 'node_modules/**'
      }),
      resolve(),
      commonjs({

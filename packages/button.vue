@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import "./common.less";
+// import "./common.less";
 import{ cloneDeep } from 'lodash'
  export default {
    name: 'button-demo',

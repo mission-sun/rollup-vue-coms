@@ -5,10 +5,31 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const smp = new SpeedMeasurePlugin();
+const  HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+
 
 
 let config = {
-  entry: './build/src/index.js',
+  mode: 'development',
+  optimization: {
+    usedExports: true, // 不导出模块中未使用的代码
+    providedExports: false, // 代码不会进行压缩
+    splitChunks: { // 代码去重，提取公共的代码
+      chunks: 'all'
+    }
+  },
+  // mode: 'production',
+  entry: {
+    one: './build/src/index.demo.js',
+    another: './build/src/index.demo1.js'
+  },
+  // externals: [{
+  //   lodash: '_' // 引用外链
+  // }],
+  // 解析模块路径
+  resolve:{
+
+  },
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
@@ -16,7 +37,10 @@ let config = {
       template: "index.html"
     }),
     new VueLoaderPlugin(),
-    new BundleAnalyzerPlugin()
+    new BundleAnalyzerPlugin({
+      openAnalyzer: false
+    }),
+    new HardSourceWebpackPlugin()
   ],
   module: {
     rules: [
@@ -59,7 +83,7 @@ let config = {
     hot: true
   },
   output: {
-    filename: 'bundle.js',
+    filename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'output')
   }
 };

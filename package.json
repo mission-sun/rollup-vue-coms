@@ -1,9 +1,10 @@
 {
-  "name": "mission-coms-demo",
-  "version": "1.0.5",
+  "name": "mission-coms-dmo",
+  "version": "1.0.8",
   "description": "打包测试",
   "main": "./dist/common.umd.js",
   "private": false,
+  "sideEffects": false,
   "files": [
     "lib",
     "dist",
@@ -69,7 +70,7 @@
     "@vue/compiler-sfc": "^3.0.4",
     "element-ui": "^2.14.1",
     "lodash": "^4.17.10",
-    "mission-coms": "^1.0.5",
+    "mission-coms": "^1.0.8",
     "rollup-plugin-alias": "^2.2.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-vue": "^5.1.3"

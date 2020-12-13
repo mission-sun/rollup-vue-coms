@@ -5,27 +5,25 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 const smp = new SpeedMeasurePlugin();
-const  HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
-
-
+// const  HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 let config = {
-  mode: 'development',
+  mode: 'production',
   optimization: {
     usedExports: true, // 不导出模块中未使用的代码
     providedExports: false, // 代码不会进行压缩
-    splitChunks: { // 代码去重，提取公共的代码
-      chunks: 'all'
-    }
+    // splitChunks: { // 代码去重，提取公共的代码
+    //   chunks: 'all'
+    // }
   },
   // mode: 'production',
-  entry: {
-    one: './build/src/index.demo.js',
-    another: './build/src/index.demo1.js'
-  },
-  // externals: [{
-  //   lodash: '_' // 引用外链
-  // }],
+  entry: './build/src/index.js',
+  // entry: {
+  //   one: './build/src/index.js'
+  // },
+  externals: [{
+    lodash: '_' // 引用外链
+  }],
   // 解析模块路径
   resolve:{
 
@@ -39,8 +37,8 @@ let config = {
     new VueLoaderPlugin(),
     new BundleAnalyzerPlugin({
       openAnalyzer: false
-    }),
-    new HardSourceWebpackPlugin()
+    })
+    // new HardSourceWebpackPlugin()
   ],
   module: {
     rules: [
@@ -78,12 +76,12 @@ let config = {
   devServer: {
     contentBase: path.join(__dirname, "output"),
     compress: true,
-    port: 9001,
+    port: 9002,
     host: "127.0.0.1",
     hot: true
   },
   output: {
-    filename: '[name].[chunkhash].js',
+    filename: '[name].[hash].js',
     path: path.resolve(__dirname, 'output')
   }
 };
